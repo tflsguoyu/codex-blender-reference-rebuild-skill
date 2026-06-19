@@ -55,7 +55,7 @@ Keep each pass focused:
 7. Materials: wood, fabric, wall paint, floor, glass, metal, texture scale.
 8. Lighting: source direction, shadow strength, window brightness, interior/exterior balance.
 9. Perceptual difference: heatmap regions, missing forms, material differences, local texture.
-10. Final archive: render, comparison, top view, `.blend`, reports, and latest-result pointers.
+10. Final delivery: `.blend` and same-view camera render. Create comparison images, top views, reports, and archives only for local debugging or deeper QA.
 
 If a metric improves but human side-by-side comparison gets worse, trust the visual comparison and update the contract or validation rule.
 
@@ -119,9 +119,9 @@ Interpretation:
 - Material/shadow heat: refine material or lighting.
 - Fine texture heat: add local detail after structure is stable.
 
-## Archive Standard
+## Optional Debug Archive Standard
 
-Use this structure in each reconstruction project:
+For local testing or deeper QA, use this structure in each reconstruction project:
 
 ```text
 REFERENCE/
@@ -138,7 +138,7 @@ ITERATION_ARCHIVE/
   perceptual/
 ```
 
-The latest results folder should make these easy to find:
+The latest results folder should make these easy to find during debugging:
 
 - Latest `.blend`.
 - Latest render.
@@ -147,4 +147,3 @@ The latest results folder should make these easy to find:
 - Latest geometry report.
 - Latest perceptual report and heatmap.
 - Latest top-view validation image.
-

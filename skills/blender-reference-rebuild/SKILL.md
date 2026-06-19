@@ -26,7 +26,7 @@ Lock screen-space first, then reconcile geometry.
 7. Re-check screen-space targets. If the render is not close, adjust camera, focal length, crop, and large proxy shapes before spending effort on materials.
 8. Tighten world geometry only after screen-space is stable. Preserve the camera match while fixing orientation, support, wall adjacency, spacing, and non-blocking collisions.
 9. Add soft furnishings, props, materials, lighting, texture density, and final details in separate passes.
-10. Produce a layered validation report and archive the latest `.blend`, render, comparison image, top view, screen-space report, geometry report, and perceptual report.
+10. Deliver the public result as an editable `.blend` file and a same-view camera render. Generate debug artifacts such as contracts, top-down views, validation reports, heatmaps, and archives only when the user asks for local testing or deeper QA.
 
 Read `references/rebuild-method.md` for the detailed contract, validation, iteration, and archive standards.
 
@@ -53,17 +53,20 @@ Run scripts from the skill directory or pass absolute paths. They are intentiona
 
 ## Deliverables
 
-For a complete reconstruction, deliver:
+For normal public use, deliver only:
 
 - Latest `.blend` file.
-- Final camera render.
-- Reference/render comparison image.
+- Same-view camera render matching the reference image.
+
+For local debugging or deeper QA, optionally produce:
+
 - Screen-space contract and report.
 - World-space contract and geometry report.
 - Blocking geometry preflight result.
-- Perceptual or LPIPS-style report, heatmap, or region ranking when available.
-- Top-view validation image.
-- Organized output folders with latest results easy to find.
+- Reference/render comparison image.
+- Top-down validation image.
+- Perceptual or LPIPS-style report, heatmap, or region ranking.
+- Iteration archive.
 
 ## Guardrails
 
@@ -72,4 +75,3 @@ For a complete reconstruction, deliver:
 - Do not let non-blocking geometry concerns derail early camera/layout alignment.
 - Do not claim final success without a layered validation report.
 - Do not silently create fake geometry; name visual proxies and state which screen-space goal they serve.
-

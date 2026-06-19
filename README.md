@@ -7,9 +7,8 @@ It is designed for Blender MCP or local Blender Python workflows where the final
 - Screen-space contracts before modeling.
 - World-space constraints after composition is close.
 - Blocking geometry preflight.
-- Layered validation reports.
-- Perceptual or LPIPS-style difference evidence.
-- Clean reconstruction project archives.
+- Same-view camera renders that match the reference.
+- Editable `.blend` scene delivery.
 
 ## Install
 
@@ -57,75 +56,46 @@ Use $blender-reference-rebuild to reconstruct this indoor reference image in Ble
 
 The skill expects Blender to be available locally. For interactive scene creation, use it with Blender MCP or an equivalent local Blender Python execution path.
 
-For a first run, ask Codex to start by creating the contracts instead of modeling immediately:
+Default public output should be simple:
 
-```text
-Use $blender-reference-rebuild to analyze this indoor reference image first. Create the screen-space and world-space contracts before building the Blender scene.
-```
+- An editable `.blend` file.
+- A same-view camera render matching the reference image.
 
 ## Example: Cozy Bedroom
 
-This repository includes a sample indoor reference image:
+This repository includes a small cozy bedroom example.
 
-```text
-examples/cozy-bedroom/reference.jpg
-```
+Reference input:
 
-It also includes two example outputs:
+![Cozy bedroom reference](examples/cozy-bedroom/reference.jpg)
 
-```text
-examples/cozy-bedroom/camera-render.png
-examples/cozy-bedroom/topdown-render.png
-```
+Same-view reconstruction render:
 
-Use it to test the skill end to end. First, create the project workspace and contracts:
+![Cozy bedroom same-view render](examples/cozy-bedroom/camera-render.png)
 
-```text
-Use $blender-reference-rebuild with examples/cozy-bedroom/reference.jpg.
+Optional top-down debug view:
 
-First, do not model yet. Analyze the image and create:
-1. A screen-space contract with normalized bboxes, crop rules, area proportions, and perspective-line notes.
-2. A world-space contract with room axes, camera intent, main objects, support relationships, and forbidden geometry relationships.
+![Cozy bedroom top-down debug render](examples/cozy-bedroom/topdown-render.png)
 
-Create a project workspace at ./examples/cozy-bedroom/output and save the contracts there.
-```
-
-Then continue with scene creation:
+Use the example like this:
 
 ```text
 Use $blender-reference-rebuild to reconstruct examples/cozy-bedroom/reference.jpg as an editable Blender scene.
 
-Use ./examples/cozy-bedroom/output as the project workspace. Build the coarse room shell and main furniture first, align the camera to the screen-space contract, run blocking geometry preflight, then refine world geometry, soft furnishings, materials, and lighting. Save the latest .blend, render, comparison image, top view, and layered validation report in LATEST_RESULTS.
+Use Blender MCP or local Blender Python. Match the final camera render to the reference image. Save only:
+1. examples/cozy-bedroom/output/scene.blend
+2. examples/cozy-bedroom/output/camera-render.png
 ```
 
 Expected output:
 
 ```text
 examples/cozy-bedroom/output/
-  REFERENCE/
-    reference.jpg
-    scene_contract.json
-  LATEST_RESULTS/
-    scene.blend
-    camera-render.png
-    reference_vs_render.png
-    topdown-render.png
-    validation_report.json
-    perceptual_report.json
-    heatmap.png
-  ITERATION_ARCHIVE/
-    reference_annotation/
-    camera_alignment/
-    structure/
-    blocking_geometry/
-    world_geometry/
-    soft_furnishing/
-    materials/
-    lighting/
-    perceptual/
+  scene.blend
+  camera-render.png
 ```
 
-For more detail, see `examples/cozy-bedroom/README.md`.
+`topdown-render.png`, validation reports, perceptual heatmaps, and iteration archives are useful for local debugging, but they are not required for normal public use.
 
 ## Repository Layout
 
@@ -139,24 +109,22 @@ skills/blender-reference-rebuild/
   assets/contracts/scene_contract.template.json
   assets/reports/validation_report.template.json
 examples/cozy-bedroom/
-  README.md
   reference.jpg
   camera-render.png
   topdown-render.png
-examples/example-prompts.md
 tools/install.sh
 tools/validate_skill.py
 ```
 
 ## Helper Scripts
 
-Create a standard reconstruction workspace:
+Optional local debugging: create a standard reconstruction workspace with contract/report folders:
 
 ```bash
 python3 skills/blender-reference-rebuild/scripts/init_rebuild_workspace.py ./my-bedroom-rebuild
 ```
 
-Validate a layered report:
+Optional local debugging: validate a layered report:
 
 ```bash
 python3 skills/blender-reference-rebuild/scripts/validate_rebuild_report.py ./my-bedroom-rebuild/LATEST_RESULTS/validation_report.json
