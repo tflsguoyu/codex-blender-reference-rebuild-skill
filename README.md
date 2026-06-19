@@ -63,6 +63,63 @@ For a first run, ask Codex to start by creating the contracts instead of modelin
 Use $blender-reference-rebuild to analyze this indoor reference image first. Create the screen-space and world-space contracts before building the Blender scene.
 ```
 
+## Example: Cozy Bedroom
+
+This repository includes a sample indoor reference image:
+
+```text
+examples/cozy-bedroom/cozy-bedroom-interior-scene-006-02.jpg
+```
+
+Use it to test the skill end to end. First, create the project workspace and contracts:
+
+```text
+Use $blender-reference-rebuild with examples/cozy-bedroom/cozy-bedroom-interior-scene-006-02.jpg.
+
+First, do not model yet. Analyze the image and create:
+1. A screen-space contract with normalized bboxes, crop rules, area proportions, and perspective-line notes.
+2. A world-space contract with room axes, camera intent, main objects, support relationships, and forbidden geometry relationships.
+
+Create a project workspace at ./examples/cozy-bedroom/output and save the contracts there.
+```
+
+Then continue with scene creation:
+
+```text
+Use $blender-reference-rebuild to reconstruct examples/cozy-bedroom/cozy-bedroom-interior-scene-006-02.jpg as an editable Blender scene.
+
+Use ./examples/cozy-bedroom/output as the project workspace. Build the coarse room shell and main furniture first, align the camera to the screen-space contract, run blocking geometry preflight, then refine world geometry, soft furnishings, materials, and lighting. Save the latest .blend, render, comparison image, top view, and layered validation report in LATEST_RESULTS.
+```
+
+Expected output:
+
+```text
+examples/cozy-bedroom/output/
+  REFERENCE/
+    cozy-bedroom-interior-scene-006-02.jpg
+    scene_contract.json
+  LATEST_RESULTS/
+    scene.blend
+    final_render.png
+    reference_vs_render.png
+    top_view.png
+    validation_report.json
+    perceptual_report.json
+    heatmap.png
+  ITERATION_ARCHIVE/
+    reference_annotation/
+    camera_alignment/
+    structure/
+    blocking_geometry/
+    world_geometry/
+    soft_furnishing/
+    materials/
+    lighting/
+    perceptual/
+```
+
+For more detail, see `examples/cozy-bedroom/README.md`.
+
 ## Repository Layout
 
 ```text
@@ -74,6 +131,9 @@ skills/blender-reference-rebuild/
   scripts/validate_rebuild_report.py
   assets/contracts/scene_contract.template.json
   assets/reports/validation_report.template.json
+examples/cozy-bedroom/
+  README.md
+  cozy-bedroom-interior-scene-006-02.jpg
 examples/example-prompts.md
 tools/install.sh
 tools/validate_skill.py
