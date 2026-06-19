@@ -1,0 +1,41 @@
+{
+  "reference_image": "",
+  "screen_space_contract": {
+    "image_size": {
+      "width": null,
+      "height": null
+    },
+    "objects": [
+      {
+        "name": "",
+        "target_bbox_norm": [0.0, 0.0, 1.0, 1.0],
+        "crop_allowed": false,
+        "crop_edges": [],
+        "visibility_notes": "",
+        "relative_position_notes": "",
+        "primary_line_angle_degrees": null
+      }
+    ],
+    "area_proportions": [],
+    "perspective_lines": [],
+    "camera_intent": ""
+  },
+  "world_space_contract": {
+    "coordinate_convention": "",
+    "camera_location_intent": "",
+    "room_shell": [],
+    "objects": [
+      {
+        "name": "",
+        "long_axis": "",
+        "front_direction": "",
+        "support": "",
+        "wall_adjacency": "",
+        "allowed_contacts": [],
+        "forbidden_contacts": []
+      }
+    ],
+    "visual_proxies": []
+  }
+}
+

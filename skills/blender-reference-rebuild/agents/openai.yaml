@@ -1,0 +1,5 @@
+interface:
+  display_name: "Blender Reference Rebuild"
+  short_description: "Rebuild indoor Blender scenes from references."
+  default_prompt: "Use $blender-reference-rebuild to rebuild this indoor reference image as an editable Blender scene with layered validation."
+

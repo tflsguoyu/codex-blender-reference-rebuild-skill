@@ -1,0 +1,42 @@
+{
+  "blocking_geometry_status": "unknown",
+  "screen_space_status": "unknown",
+  "world_geometry_status": "unknown",
+  "perceptual_status": "unknown",
+  "final_status": "unknown",
+  "blocking_geometry": {
+    "missing_key_objects": [],
+    "severe_intersections": [],
+    "floating_objects": [],
+    "notes": ""
+  },
+  "screen_space": {
+    "objects": [],
+    "perspective_lines": [],
+    "area_proportions": [],
+    "notes": ""
+  },
+  "world_geometry": {
+    "object_bounds": [],
+    "collisions": [],
+    "support_relationships": [],
+    "top_view_notes": ""
+  },
+  "perceptual": {
+    "metric": "",
+    "score": null,
+    "heatmap": "",
+    "overlay": "",
+    "top_regions": []
+  },
+  "artifacts": {
+    "blend": "",
+    "render": "",
+    "comparison": "",
+    "top_view": "",
+    "screen_space_report": "",
+    "geometry_report": "",
+    "perceptual_report": ""
+  }
+}
+
