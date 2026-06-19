@@ -1,16 +1,26 @@
 # Cozy Bedroom Example
 
-This example shows how to test `blender-reference-rebuild` with a single indoor reference image.
+This example shows how to test `blender-reference-rebuild` with a single indoor reference image and two completed render examples.
 
 ## Input
 
 Reference image:
 
 ```text
-examples/cozy-bedroom/cozy-bedroom-interior-scene-006-02.jpg
+examples/cozy-bedroom/reference.jpg
 ```
 
 The image is a cozy bedroom interior reference. It should be used as the visual target for the final Blender camera render.
+
+Example outputs:
+
+```text
+examples/cozy-bedroom/camera-render.png
+examples/cozy-bedroom/topdown-render.png
+```
+
+- `camera-render.png`: a same-view render from the reconstructed Blender scene.
+- `topdown-render.png`: a top-down render used to inspect world-space layout and object relationships.
 
 ## Before You Start
 
@@ -26,7 +36,7 @@ Make sure:
 Start with contracts only:
 
 ```text
-Use $blender-reference-rebuild with examples/cozy-bedroom/cozy-bedroom-interior-scene-006-02.jpg.
+Use $blender-reference-rebuild with examples/cozy-bedroom/reference.jpg.
 
 First, do not model yet. Analyze the image and create:
 1. A screen-space contract with normalized bboxes, crop rules, area proportions, and perspective-line notes.
@@ -40,7 +50,7 @@ Create a project workspace at ./examples/cozy-bedroom/output and save the contra
 After reviewing the contracts, continue with:
 
 ```text
-Use $blender-reference-rebuild to reconstruct examples/cozy-bedroom/cozy-bedroom-interior-scene-006-02.jpg as an editable Blender scene.
+Use $blender-reference-rebuild to reconstruct examples/cozy-bedroom/reference.jpg as an editable Blender scene.
 
 Use ./examples/cozy-bedroom/output as the project workspace. Build the coarse room shell and main furniture first, align the camera to the screen-space contract, run blocking geometry preflight, then refine world geometry, soft furnishings, materials, and lighting. Save the latest .blend, render, comparison image, top view, and layered validation report in LATEST_RESULTS.
 ```
@@ -52,13 +62,13 @@ A complete run should create or update:
 ```text
 examples/cozy-bedroom/output/
   REFERENCE/
-    cozy-bedroom-interior-scene-006-02.jpg
+    reference.jpg
     scene_contract.json
   LATEST_RESULTS/
     scene.blend
-    final_render.png
+    camera-render.png
     reference_vs_render.png
-    top_view.png
+    topdown-render.png
     validation_report.json
     perceptual_report.json
     heatmap.png
@@ -74,7 +84,7 @@ examples/cozy-bedroom/output/
     perceptual/
 ```
 
-The exact filenames may vary, but `LATEST_RESULTS/validation_report.json` should include:
+The included `camera-render.png` and `topdown-render.png` are example outputs. A new run may produce different images, but `LATEST_RESULTS/validation_report.json` should include:
 
 - `blocking_geometry_status`
 - `screen_space_status`
@@ -93,4 +103,3 @@ python3 skills/blender-reference-rebuild/scripts/validate_rebuild_report.py \
 ```
 
 This checks the report shape. It does not judge whether the render looks good; Codex should still compare the reference and render visually and use the layered validation evidence.
-

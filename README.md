@@ -68,13 +68,20 @@ Use $blender-reference-rebuild to analyze this indoor reference image first. Cre
 This repository includes a sample indoor reference image:
 
 ```text
-examples/cozy-bedroom/cozy-bedroom-interior-scene-006-02.jpg
+examples/cozy-bedroom/reference.jpg
+```
+
+It also includes two example outputs:
+
+```text
+examples/cozy-bedroom/camera-render.png
+examples/cozy-bedroom/topdown-render.png
 ```
 
 Use it to test the skill end to end. First, create the project workspace and contracts:
 
 ```text
-Use $blender-reference-rebuild with examples/cozy-bedroom/cozy-bedroom-interior-scene-006-02.jpg.
+Use $blender-reference-rebuild with examples/cozy-bedroom/reference.jpg.
 
 First, do not model yet. Analyze the image and create:
 1. A screen-space contract with normalized bboxes, crop rules, area proportions, and perspective-line notes.
@@ -86,7 +93,7 @@ Create a project workspace at ./examples/cozy-bedroom/output and save the contra
 Then continue with scene creation:
 
 ```text
-Use $blender-reference-rebuild to reconstruct examples/cozy-bedroom/cozy-bedroom-interior-scene-006-02.jpg as an editable Blender scene.
+Use $blender-reference-rebuild to reconstruct examples/cozy-bedroom/reference.jpg as an editable Blender scene.
 
 Use ./examples/cozy-bedroom/output as the project workspace. Build the coarse room shell and main furniture first, align the camera to the screen-space contract, run blocking geometry preflight, then refine world geometry, soft furnishings, materials, and lighting. Save the latest .blend, render, comparison image, top view, and layered validation report in LATEST_RESULTS.
 ```
@@ -96,13 +103,13 @@ Expected output:
 ```text
 examples/cozy-bedroom/output/
   REFERENCE/
-    cozy-bedroom-interior-scene-006-02.jpg
+    reference.jpg
     scene_contract.json
   LATEST_RESULTS/
     scene.blend
-    final_render.png
+    camera-render.png
     reference_vs_render.png
-    top_view.png
+    topdown-render.png
     validation_report.json
     perceptual_report.json
     heatmap.png
@@ -133,7 +140,9 @@ skills/blender-reference-rebuild/
   assets/reports/validation_report.template.json
 examples/cozy-bedroom/
   README.md
-  cozy-bedroom-interior-scene-006-02.jpg
+  reference.jpg
+  camera-render.png
+  topdown-render.png
 examples/example-prompts.md
 tools/install.sh
 tools/validate_skill.py
