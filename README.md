@@ -33,6 +33,20 @@ mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
 cp -R skills/blender-reference-rebuild "${CODEX_HOME:-$HOME/.codex}/skills/"
 ```
 
+## Prepare Your Environment
+
+Before using the skill, make sure you have:
+
+1. Codex installed and able to load local skills from `${CODEX_HOME:-$HOME/.codex}/skills`.
+2. Blender installed locally.
+3. Blender open when you want Codex to create or inspect a scene.
+4. A working Blender control path:
+   - Blender MCP / Blender Lab MCP, recommended for interactive scene control.
+   - Or another local Blender Python execution workflow that Codex can use.
+5. An indoor reference image ready to provide to Codex.
+
+This skill does not install Blender or Blender MCP for you. It teaches Codex the reconstruction workflow once Blender access is already available.
+
 ## Use
 
 In Codex, ask:
@@ -42,6 +56,12 @@ Use $blender-reference-rebuild to reconstruct this indoor reference image in Ble
 ```
 
 The skill expects Blender to be available locally. For interactive scene creation, use it with Blender MCP or an equivalent local Blender Python execution path.
+
+For a first run, ask Codex to start by creating the contracts instead of modeling immediately:
+
+```text
+Use $blender-reference-rebuild to analyze this indoor reference image first. Create the screen-space and world-space contracts before building the Blender scene.
+```
 
 ## Repository Layout
 
@@ -82,4 +102,3 @@ python3 tools/validate_skill.py skills/blender-reference-rebuild
 ## License
 
 MIT
-
